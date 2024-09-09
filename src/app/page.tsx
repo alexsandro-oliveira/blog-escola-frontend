@@ -1,8 +1,8 @@
 import { SearchIcon } from "lucide-react"
-import Header from "./_components/header"
 import { Button } from "./_components/ui/button"
 import { Input } from "./_components/ui/input"
-import Post from "./_components/post-item"
+import Header from "./_components/Header"
+import Post from "./_components/Post-item"
 
 const Home = () => {
   return (
