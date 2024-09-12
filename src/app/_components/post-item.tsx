@@ -1,7 +1,20 @@
+import Link from "next/link"
 import { Avatar, AvatarImage } from "./ui/avatar"
 import { Card, CardContent } from "./ui/card"
 
-const Post = () => {
+interface PostItemProps {
+  post: {
+    _id: string
+    title: string
+    author: string
+    content: string
+  }
+}
+
+const PostItem = async ({ post }: PostItemProps) => {
+  const objectId = post._id
+  const id = objectId.toString()
+
   return (
     <Card className="min-w-[167px] rounded-2xl">
       <CardContent>
@@ -13,7 +26,7 @@ const Post = () => {
                 alt="User avatar"
               />
             </Avatar>
-            <h1>Autor</h1>
+            <h1>{post.author}</h1>
           </div>
           <time
             className="text-xs"
@@ -25,17 +38,14 @@ const Post = () => {
         </header>
 
         <div className="mt-8">
-          <p className="mb-4">Titulo</p>
-          <p className="line-clamp-3 text-xs">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam
-            voluptas voluptate itaque totam libero explicabo. Ipsa impedit,
-            molestias autem quod laudantium nesciunt asperiores alias minima
-            laborum unde, harum optio. Corrupti!
-          </p>
+          <Link href={`/posts/${id}`}>
+            <p className="mb-4">{post.title}</p>
+            <p className="line-clamp-2 text-xs">{post.content}</p>
+          </Link>
         </div>
       </CardContent>
     </Card>
   )
 }
 
-export default Post
+export default PostItem
