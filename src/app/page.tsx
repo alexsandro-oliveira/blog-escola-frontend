@@ -7,11 +7,6 @@ import PostItem from "./_components/Post-item"
 const Home = async () => {
   const data = await fetch("http://localhost:3109/posts/admin")
   const posts = await data.json()
-<<<<<<< HEAD
-=======
-
-  console.log(posts)
->>>>>>> 8e8fd787e2ae023a332b53d274dd01389ea3913c
 
   return (
     <div className="w-full">
