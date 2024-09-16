@@ -2,19 +2,7 @@ import Link from "next/link"
 import { Avatar, AvatarImage } from "./ui/avatar"
 import { Card, CardContent } from "./ui/card"
 
-interface PostItemProps {
-  post: {
-    _id: string
-    title: string
-    author: string
-    content: string
-  }
-}
-
-const PostItem = async ({ post }: PostItemProps) => {
-  const objectId = post._id
-  const id = objectId.toString()
-
+const PostItem = async ({ post }: { post: Posts.Post }) => {
   return (
     <Card className="min-w-[167px] rounded-2xl">
       <CardContent>
@@ -38,7 +26,7 @@ const PostItem = async ({ post }: PostItemProps) => {
         </header>
 
         <div className="mt-8">
-          <Link href={`/posts/${id}`}>
+          <Link href={`/posts/${post.id}`}>
             <p className="mb-4">{post.title}</p>
             <p className="line-clamp-2 text-xs">{post.content}</p>
           </Link>

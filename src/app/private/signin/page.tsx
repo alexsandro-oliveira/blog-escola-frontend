@@ -5,8 +5,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../_components/ui/card"
-import SigninForm from "../_components/SigninForm"
+} from "../../_components/ui/card"
+import SigninForm from "../../_components/SigninForm"
 
 const Login = () => {
   return (

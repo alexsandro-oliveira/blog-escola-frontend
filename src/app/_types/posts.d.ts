@@ -1,6 +1,6 @@
 declare namespace Posts {
   export interface Post {
-    _id: string
+    id: string
     title: string
     author: string
     content: string
