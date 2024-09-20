@@ -19,6 +19,7 @@ export default function SigninForm() {
     const formData = new FormData(e.currentTarget)
 
     const data = {
+      name: formData.get("name"),
       email: formData.get("email"),
       password: formData.get("password"),
     }

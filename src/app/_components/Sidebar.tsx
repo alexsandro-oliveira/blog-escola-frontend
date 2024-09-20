@@ -38,13 +38,13 @@ const SidebarSheet = async () => {
           {session?.user && (
             <>
               <Button className="justify-start gap-2" variant="ghost" asChild>
-                <Link href="">
+                <Link href="/private/new-post">
                   <FilePlus2Icon size={18} />
                   Novo Post
                 </Link>
               </Button>
               <Button className="justify-start gap-2" variant="ghost" asChild>
-                <Link href="">
+                <Link href="/private/signup">
                   <UserPlusIcon size={18} />
                   Criar Professor
                 </Link>

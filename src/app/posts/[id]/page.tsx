@@ -9,7 +9,7 @@ interface PostPageProps {
 }
 
 const PostPage = async ({ params }: PostPageProps) => {
-  const data = await fetch(`http://localhost:3109/posts/${params.id}`)
+  const data = await fetch(`http://localhost:3108/posts/${params.id}`)
   const post = await data.json()
 
   return (

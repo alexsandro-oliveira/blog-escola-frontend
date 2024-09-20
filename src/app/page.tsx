@@ -2,16 +2,11 @@ import { SearchIcon } from "lucide-react"
 import { Button } from "./_components/ui/button"
 import { Input } from "./_components/ui/input"
 import Header from "./_components/Header"
-import PostItem from "./_components/Post-item"
+import PostItem from "./_components/post-item"
 
 const Home = async () => {
-  const data = await fetch("http://localhost:3109/posts/admin")
+  const data = await fetch("http://localhost:3108/posts")
   const posts = await data.json()
-<<<<<<< HEAD
-=======
-
-  console.log(posts)
->>>>>>> 8e8fd787e2ae023a332b53d274dd01389ea3913c
 
   return (
     <div className="w-full">
@@ -27,7 +22,9 @@ const Home = async () => {
 
         <div className="space-y-4 overflow-auto">
           {posts.length > 0 &&
-            posts.map((post) => <PostItem key={post.id} post={post} />)}
+            posts.map((post: Posts.Post) => (
+              <PostItem key={post.id} post={post} />
+            ))}
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import { cookies } from "next/headers"
 
 const handler = NextAuth({
   pages: {
@@ -9,36 +10,39 @@ const handler = NextAuth({
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-<<<<<<< HEAD
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
-=======
         email: {},
         password: {},
->>>>>>> 8e8fd787e2ae023a332b53d274dd01389ea3913c
       },
       async authorize(credentials) {
         if (!credentials) {
           return null
         }
-<<<<<<< HEAD
 
-        if (
-          credentials.email === "admin@email.com" &&
-          credentials.password === "123"
-        ) {
-          return {
-            id: 1,
-            name: "Admin",
-            email: "admin",
-          }
-        }
-        return null
-=======
         try {
-          const response = await fetch("http://localhost:3000/api/auth/signin", {})
+          const response = await fetch(
+            "http://localhost:3108/teachers/signin",
+            {
+              method: "POST",
+              body: JSON.stringify({
+                email: credentials?.email,
+                password: credentials?.password,
+              }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            },
+          )
+
+          if (response.status !== 201) return null
+          const authData = await response.json()
+
+          console.log(authData.jwt)
+          cookies().set("jwt", authData.jwt)
+          return authData
+        } catch (error) {
+          console.error(error)
+          return null
         }
->>>>>>> 8e8fd787e2ae023a332b53d274dd01389ea3913c
       },
     }),
   ],
