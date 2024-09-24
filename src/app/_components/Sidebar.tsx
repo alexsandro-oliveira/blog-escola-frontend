@@ -1,6 +1,11 @@
 import { FilePlus2Icon, HomeIcon, LogInIcon, UserPlusIcon } from "lucide-react"
 import { Button } from "./ui/button"
-import { SheetContent, SheetHeader, SheetTitle } from "./ui/sheet"
+import {
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "./ui/sheet"
 import Link from "next/link"
 import { getServerSession } from "next-auth"
 import ButtonLogout from "./ButtonLogout"
@@ -13,6 +18,7 @@ const SidebarSheet = async () => {
       <SheetHeader>
         <SheetTitle className="text-left">Menu</SheetTitle>
       </SheetHeader>
+      <SheetDescription />
 
       <div>
         <div className="flex items-center justify-between gap-3 border-b border-solid py-5">
