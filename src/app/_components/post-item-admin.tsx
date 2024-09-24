@@ -2,10 +2,14 @@ import Link from "next/link"
 import { Avatar, AvatarImage } from "./ui/avatar"
 import { Card, CardContent } from "./ui/card"
 
-const PostItem = async ({ post }: { post: Posts.Post }) => {
+interface PostAdminProps {
+  post: PostsAdmin.PostAdmin
+}
+
+const PostItemAdmin = async ({ post }: PostAdminProps) => {
   return (
     <Card className="min-w-[167px] rounded-2xl">
-      <Link href={`/posts/${post.id}`}>
+      <Link href={`/posts/${post._id}`}>
         <CardContent>
           <header className="mt-3 flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -36,4 +40,4 @@ const PostItem = async ({ post }: { post: Posts.Post }) => {
   )
 }
 
-export default PostItem
+export default PostItemAdmin

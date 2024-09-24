@@ -3,21 +3,57 @@ import { Button } from "./ui/button"
 import { Card, CardContent } from "./ui/card"
 import { Sheet, SheetTrigger } from "./ui/sheet"
 import SidebarSheet from "./Sidebar"
+import { ButtonBack } from "./ButtonBack"
+import Link from "next/link"
+import ButtonLogout from "./ButtonLogout"
+import { getServerSession } from "next-auth"
 
-const Header = () => {
+const Header = async () => {
+  const session = await getServerSession()
+
   return (
     <Card>
       <CardContent className="flex flex-row items-center justify-between p-5">
-        <h1 className="ml-[45%] py-5 text-2xl">Posts</h1>
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline" size="icon">
-              <MenuIcon />
-            </Button>
-          </SheetTrigger>
+        <ButtonBack />
 
-          <SidebarSheet />
-        </Sheet>
+        <Link href="/">
+          <h1 className="py-5 text-3xl font-bold text-primary">
+            FIAP <span className="text-lg font-light text-white">.blog</span>
+          </h1>
+        </Link>
+        <div className="hidden lg:block">
+          <div className="flex items-center">
+            {session && (
+              <>
+                <Button variant="ghost" className="w-fit" size="sm" asChild>
+                  <Link href="/private/new-post">Novo Post</Link>
+                </Button>
+                <Button variant="ghost" className="w-fit" size="sm" asChild>
+                  <Link href="/private/signup">Criar Professor</Link>
+                </Button>
+              </>
+            )}
+
+            {session ? (
+              <ButtonLogout />
+            ) : (
+              <Button variant="ghost" className="w-fit" asChild>
+                <Link href="/api/auth/signin">Login</Link>
+              </Button>
+            )}
+          </div>
+        </div>
+        <div className="md:block lg:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon">
+                <MenuIcon />
+              </Button>
+            </SheetTrigger>
+
+            <SidebarSheet />
+          </Sheet>
+        </div>
       </CardContent>
     </Card>
   )

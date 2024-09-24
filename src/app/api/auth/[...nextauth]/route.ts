@@ -4,7 +4,7 @@ import { cookies } from "next/headers"
 
 const handler = NextAuth({
   pages: {
-    signIn: "/signin",
+    signIn: "/private/signin",
   },
   providers: [
     CredentialsProvider({
@@ -36,8 +36,7 @@ const handler = NextAuth({
           if (response.status !== 201) return null
           const authData = await response.json()
 
-          console.log(authData.jwt)
-          cookies().set("jwt", authData.jwt)
+          cookies().set("jwt", authData.access_token)
           return authData
         } catch (error) {
           console.error(error)

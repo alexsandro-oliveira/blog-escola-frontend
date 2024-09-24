@@ -8,7 +8,7 @@ const ButtonLogout = () => {
   const handleLogoutClick = () => signOut()
   return (
     <Button
-      className="w-full justify-start gap-2 text-destructive"
+      className="w-fit justify-start gap-2 text-destructive"
       variant="ghost"
       onClick={handleLogoutClick}
     >
