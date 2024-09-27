@@ -1,4 +1,3 @@
-import Header from "@/app/_components/header"
 import PostItemAdmin from "@/app/_components/post-item-admin"
 import { Button } from "@/app/_components/ui/button"
 import { Input } from "@/app/_components/ui/input"
@@ -19,8 +18,7 @@ const PostsAdmin = async () => {
 
   return (
     <div className="w-full">
-      <Header />
-      <div className="p-5">
+      <div className="p-5 lg:px-24">
         <div className="mb-4 flex items-center gap-6">
           <Input placeholder="Faça sua busca" />
 

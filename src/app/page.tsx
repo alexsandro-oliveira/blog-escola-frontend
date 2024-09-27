@@ -2,17 +2,21 @@ import { SearchIcon } from "lucide-react"
 import { Button } from "./_components/ui/button"
 import { Input } from "./_components/ui/input"
 import PostItem from "./_components/post-item"
-import Header from "@/app/_components/header"
-import { Footer } from "./_components/Footer"
+import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 
 const Home = async () => {
   const data = await fetch("http://localhost:3108/posts")
   const posts = await data.json()
 
+  const session = await getServerSession()
+  if (session?.user) {
+    redirect("/private/posts-admin")
+  }
+
   return (
     <div className="w-full">
-      <Header />
-      <div className="p-5">
+      <div className="p-5 lg:px-24">
         <div className="mb-4 flex items-center gap-6">
           <Input placeholder="Faça sua busca" />
 
@@ -28,7 +32,6 @@ const Home = async () => {
             ))}
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

@@ -1,8 +1,12 @@
 import Link from "next/link"
 import { Avatar, AvatarImage } from "./ui/avatar"
 import { Card, CardContent } from "./ui/card"
+import { formatDistance } from "date-fns"
+import { ptBR } from "date-fns/locale"
+import { format } from "date-fns"
 
 const PostItem = async ({ post }: { post: Posts.Post }) => {
+  console.log(post.content)
   return (
     <Card className="min-w-[167px] rounded-2xl">
       <Link href={`/posts/${post.id}`}>
@@ -19,10 +23,18 @@ const PostItem = async ({ post }: { post: Posts.Post }) => {
             </div>
             <time
               className="text-xs"
-              title="07 de Setembro de 2024"
-              dateTime="2024-09-07 22:15:00"
+              title={format(
+                new Date(post.createdAt),
+                "dd 'de' MMMM 'de' yyyy",
+                { locale: ptBR },
+              )}
+              dateTime={post.createdAt.toString()}
             >
-              Publicado há 1h
+              Publicado há{" "}
+              {formatDistance(new Date(), new Date(post.createdAt), {
+                locale: ptBR,
+              })}{" "}
+              atrás
             </time>
           </header>
 

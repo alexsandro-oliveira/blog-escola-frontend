@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { cookies } from "next/headers"
@@ -45,6 +46,15 @@ const handler = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    async session({ session, user }) {
+      session.user = {
+        ...session.user,
+        user,
+      } as any
+      return session
+    },
+  },
 })
 
 export { handler as GET, handler as POST }

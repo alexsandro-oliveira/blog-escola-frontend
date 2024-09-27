@@ -1,6 +1,7 @@
-import Header from "@/app/_components/header"
 import { Avatar, AvatarImage } from "@/app/_components/ui/avatar"
 import { Card, CardContent, CardFooter } from "@/app/_components/ui/card"
+import { format, formatDistance } from "date-fns"
+import { ptBR } from "date-fns/locale"
 
 interface PostPageProps {
   params: {
@@ -14,8 +15,6 @@ const PostPage = async ({ params }: PostPageProps) => {
 
   return (
     <>
-      <Header />
-
       <div className="flex justify-center">
         <Card className="mt-8 w-[80%] min-w-[167px] rounded-2xl">
           <CardContent>
@@ -39,10 +38,18 @@ const PostPage = async ({ params }: PostPageProps) => {
             </div>
             <time
               className="text-xs"
-              title="07 de Setembro de 2024"
-              dateTime="2024-09-07 22:15:00"
+              title={format(
+                new Date(post.createdAt),
+                "dd 'de' MMMM 'de' yyyy",
+                { locale: ptBR },
+              )}
+              dateTime={post.createdAt.toString()}
             >
-              Publicado há 1h
+              Publicado há{" "}
+              {formatDistance(new Date(), new Date(post.createdAt), {
+                locale: ptBR,
+              })}{" "}
+              atrás
             </time>
           </CardFooter>
         </Card>

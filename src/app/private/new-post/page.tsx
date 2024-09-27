@@ -1,6 +1,5 @@
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
-import Header from "@/app/_components/header"
 import { NewPostForm } from "@/app/_components/NewPostForm"
 
 const TeacherPage = async () => {
@@ -11,8 +10,6 @@ const TeacherPage = async () => {
   }
   return (
     <div>
-      <Header />
-
       <div className="p-5">
         <NewPostForm />
       </div>

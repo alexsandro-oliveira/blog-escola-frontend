@@ -13,11 +13,11 @@ const Header = async () => {
 
   return (
     <Card>
-      <CardContent className="flex flex-row items-center justify-between p-5">
+      <CardContent className="flex flex-row items-center justify-between p-5 lg:px-8">
         <ButtonBack />
 
         <Link href="/">
-          <h1 className="py-5 text-3xl font-bold text-primary">
+          <h1 className="py-5 text-3xl font-bold text-primary lg:ps-4">
             FIAP <span className="text-lg font-light text-white">.blog</span>
           </h1>
         </Link>
