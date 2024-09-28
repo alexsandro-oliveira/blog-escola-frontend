@@ -4,11 +4,7 @@ import { fetchClient } from "../_lib/fetchClient"
 import { Button } from "./ui/button"
 import { Trash2Icon } from "lucide-react"
 
-interface PostPageProps {
-  _id: string
-}
-
-export const ButtonDelete = (id: PostPageProps) => {
+export const ButtonDelete = (id: PostsAdmin.PostPageProps) => {
   const handleDelete = async () => {
     fetchClient(`http://localhost:3108/posts/${id._id}`, {
       method: "DELETE",

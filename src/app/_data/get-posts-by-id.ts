@@ -1,8 +1,4 @@
-interface GetPostsByIdProps {
-  id: string
-}
-
-export const getPostsById = async (id: GetPostsByIdProps) => {
+export const getPostsById = async (id: Posts.postId) => {
   let data: Response
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let post: any

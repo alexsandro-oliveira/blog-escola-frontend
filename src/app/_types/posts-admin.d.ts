@@ -6,4 +6,8 @@ declare namespace PostsAdmin {
     author: string
     createdAt: Date
   }
+
+  export interface PostPageProps {
+    _id: string
+  }
 }
