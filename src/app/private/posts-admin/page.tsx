@@ -35,7 +35,7 @@ const PostsAdmin = async () => {
         </div>
 
         <div className="space-y-4 overflow-auto">
-          {posts.length > 0 &&
+          {posts && posts.length > 0 &&
             posts.map((post: PostsAdmin.PostAdmin) => (
               <PostItemAdmin key={post._id} post={post} />
             ))}
