@@ -1,6 +1,6 @@
 "use client"
 
-import { deletePost } from "../_actions/delete-post"
+import { fetchClient } from "../_lib/fetchClient"
 import { Button } from "./ui/button"
 import { Trash2Icon } from "lucide-react"
 
@@ -10,11 +10,13 @@ interface PostPageProps {
 
 export const ButtonDelete = (id: PostPageProps) => {
   const handleDelete = async () => {
-    try {
-      await deletePost(id._id)
-    } catch (error) {
-      console.error(error)
-    }
+    fetchClient(`http://localhost:3108/posts/${id._id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(id),
+    }).catch((error) => console.error(error))
   }
 
   return (
