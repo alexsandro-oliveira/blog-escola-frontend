@@ -10,8 +10,16 @@ interface PostPageProps {
 }
 
 const PostPage = async ({ params }: PostPageProps) => {
-  const data = await fetch(`http://localhost:3108/posts/${params.id}`)
-  const post = await data.json()
+  let data: Response
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let post: any
+  try {
+    data = await fetch(`http://localhost:3108/posts/${params.id}`)
+    post = await data.json()
+    return post
+  } catch (error) {
+    console.error("Error getting post by id:", error)
+  }
 
   return (
     <>

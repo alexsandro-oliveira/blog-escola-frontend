@@ -12,9 +12,16 @@ const PostsAdmin = async () => {
     redirect("/")
   }
 
-  const data = await fetchServer("http://localhost:3108/posts/admin")
-  if (data.status !== 200) return { error: data.statusText }
-  const posts = await data.json()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let posts: any
+  try {
+    const data = await fetchServer("http://localhost:3108/posts/admin")
+    if (data.status !== 200) return { error: data.statusText }
+    posts = await data.json()
+  } catch (error) {
+    console.error("Error fetching posts:", error)
+    return { error: "Failed to fetch posts" }
+  }
 
   return (
     <div className="w-full">

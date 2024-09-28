@@ -4,8 +4,15 @@ import { Input } from "./_components/ui/input"
 import PostItem from "./_components/post-item"
 
 const Home = async () => {
-  const data = await fetch("http://localhost:3108/posts")
-  const posts = await data.json()
+  let data: Response
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let posts: any
+  try {
+    data = await fetch("http://localhost:3108/posts")
+    posts = await data.json()
+  } catch (error) {
+    console.error("Error getting posts:", error)
+  }
 
   return (
     <div className="w-full">
@@ -19,7 +26,7 @@ const Home = async () => {
         </div>
 
         <div className="space-y-4 overflow-y-auto">
-          {posts.length > 0 &&
+          {posts && posts.length > 0 &&
             posts.map((post: Posts.Post) => (
               <PostItem key={post.id} post={post} />
             ))}
