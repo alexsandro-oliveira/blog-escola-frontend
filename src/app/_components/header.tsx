@@ -1,20 +1,25 @@
-import { MenuIcon } from "lucide-react"
+"use client"
+
+import { MenuIcon, Undo2 } from "lucide-react"
 import { Button } from "./ui/button"
 import { Card, CardContent } from "./ui/card"
 import { Sheet, SheetTrigger } from "./ui/sheet"
 import SidebarSheet from "./Sidebar"
-import { ButtonBack } from "./ButtonBack"
 import Link from "next/link"
 import ButtonLogout from "./ButtonLogout"
-import { getServerSession } from "next-auth"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
-const Header = async () => {
-  const session = await getServerSession()
+const Header = () => {
+  const { data: session } = useSession()
+  const router = useRouter()
 
   return (
     <Card>
       <CardContent className="flex flex-row items-center justify-between p-5 lg:px-8">
-        <ButtonBack />
+        <Button onClick={router.back} variant="outline" size="icon">
+          <Undo2 size={18} />
+        </Button>
 
         <Link href="/">
           <h1 className="py-5 text-3xl font-bold text-primary lg:ps-4">

@@ -1,17 +1,29 @@
-import { FilePlus2Icon, HomeIcon, LogInIcon, UserPlusIcon } from "lucide-react"
+"use client"
+
+import {
+  FilePlus2Icon,
+  FolderDotIcon,
+  HomeIcon,
+  LogInIcon,
+  LogOutIcon,
+  UserPlusIcon,
+} from "lucide-react"
 import { Button } from "./ui/button"
 import {
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
 } from "./ui/sheet"
 import Link from "next/link"
-import { getServerSession } from "next-auth"
-import ButtonLogout from "./ButtonLogout"
 
-const SidebarSheet = async () => {
-  const session = await getServerSession()
+import { signOut, useSession } from "next-auth/react"
+
+const SidebarSheet = () => {
+  const { data: session } = useSession()
+
+  const handleLogoutClick = () => signOut()
 
   return (
     <SheetContent>
@@ -34,15 +46,23 @@ const SidebarSheet = async () => {
         </div>
 
         <div className="flex flex-col gap-4 p-5">
-          <Button className="justify-start gap-2" variant="ghost" asChild>
-            <Link href="/">
-              <HomeIcon size={18} />
-              Inicio
-            </Link>
-          </Button>
+          <SheetClose asChild>
+            <Button className="justify-start gap-2" variant="ghost" asChild>
+              <Link href="/">
+                <HomeIcon size={18} />
+                Inicio
+              </Link>
+            </Button>
+          </SheetClose>
 
           {session?.user && (
             <>
+              <Button className="justify-start gap-2" variant="ghost" asChild>
+                <Link href="/private/posts-admin">
+                  <FolderDotIcon size={18} />
+                  Admin
+                </Link>
+              </Button>
               <Button className="justify-start gap-2" variant="ghost" asChild>
                 <Link href="/private/new-post">
                   <FilePlus2Icon size={18} />
@@ -56,7 +76,14 @@ const SidebarSheet = async () => {
                 </Link>
               </Button>
 
-              <ButtonLogout />
+              <Button
+                className="w-fit justify-start gap-2 text-destructive"
+                variant="ghost"
+                onClick={handleLogoutClick}
+              >
+                <LogOutIcon size={18} />
+                Sair
+              </Button>
             </>
           )}
         </div>

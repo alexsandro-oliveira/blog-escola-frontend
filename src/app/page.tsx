@@ -2,17 +2,10 @@ import { SearchIcon } from "lucide-react"
 import { Button } from "./_components/ui/button"
 import { Input } from "./_components/ui/input"
 import PostItem from "./_components/post-item"
-import { getServerSession } from "next-auth"
-import { redirect } from "next/navigation"
 
 const Home = async () => {
   const data = await fetch("http://localhost:3108/posts")
   const posts = await data.json()
-
-  const session = await getServerSession()
-  if (session?.user) {
-    redirect("/private/posts-admin")
-  }
 
   return (
     <div className="w-full">

@@ -6,7 +6,6 @@ import { ptBR } from "date-fns/locale"
 import { format } from "date-fns"
 
 const PostItem = async ({ post }: { post: Posts.Post }) => {
-  console.log(post.content)
   return (
     <Card className="min-w-[167px] rounded-2xl">
       <Link href={`/posts/${post.id}`}>
