@@ -7,9 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { Textarea } from "./ui/textarea"
-
-import { fetchClient } from "../_lib/fetchClient"
 import { toast } from "sonner"
+import { newPost } from "../_actions/new-post"
 
 const formSchema = z.object({
   title: z.string().min(5, {
@@ -28,20 +27,16 @@ export const NewPostForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
+      content: "",
+      author: "",
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(post: z.infer<typeof formSchema>) {
     try {
-      fetchClient("http://localhost:3108/posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
+      await newPost(post)
       toast.success("Post criado com sucesso!")
-      form
+      form.reset()
     } catch (error) {
       console.error(error)
       toast.error("Erro ao criar post.")
@@ -70,7 +65,7 @@ export const NewPostForm = () => {
             <FormItem>
               <FormControl>
                 <Textarea
-                  className="h-[450px]"
+                  className="h-[250px]"
                   placeholder="Digite seu texto..."
                   {...field}
                 />
