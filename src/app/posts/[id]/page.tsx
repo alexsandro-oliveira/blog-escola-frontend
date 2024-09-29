@@ -22,7 +22,7 @@ const PostPage = async ({ params }: { params: Posts.PostId }) => {
         <PostNotFound />
       )}
     </>
-  ) 
+  )
 }
 
 export default PostPage
