@@ -10,7 +10,7 @@ const PostPage = async ({ params }: { params: Posts.postId }) => {
   try {
     data = await fetch(`http://localhost:3108/posts/${params.id}`)
     post = await data.json()
-    return post
+    
   } catch (error) {
     console.error("Error getting post by id:", error)
   }
