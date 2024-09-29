@@ -31,6 +31,9 @@ const Header = () => {
             {session && (
               <>
                 <Button variant="ghost" className="w-fit" size="sm" asChild>
+                  <Link href="/private/posts-admin">Admin</Link>
+                </Button>
+                <Button variant="ghost" className="w-fit" size="sm" asChild>
                   <Link href="/private/new-post">Novo Post</Link>
                 </Button>
                 <Button variant="ghost" className="w-fit" size="sm" asChild>

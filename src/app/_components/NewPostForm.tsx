@@ -1,7 +1,7 @@
 "use client"
 
 import { useForm } from "react-hook-form"
-import { Form, FormControl, FormField, FormItem } from "./ui/form"
+import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Input } from "./ui/input"
@@ -9,6 +9,7 @@ import { Button } from "./ui/button"
 import { Textarea } from "./ui/textarea"
 
 import { fetchClient } from "../_lib/fetchClient"
+import { toast } from "sonner"
 
 const formSchema = z.object({
   title: z.string().min(5, {
@@ -31,13 +32,20 @@ export const NewPostForm = () => {
   })
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    fetchClient("http://localhost:3108/posts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).catch((error) => console.error(error))
+    try {
+      fetchClient("http://localhost:3108/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+      toast.success("Post criado com sucesso!")
+      form
+    } catch (error) {
+      console.error(error)
+      toast.error("Erro ao criar post.")
+    }
   }
 
   return (
@@ -51,6 +59,7 @@ export const NewPostForm = () => {
               <FormControl>
                 <Input placeholder="Título..." {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -66,6 +75,7 @@ export const NewPostForm = () => {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -77,6 +87,7 @@ export const NewPostForm = () => {
               <FormControl>
                 <Input placeholder="Autor..." {...field} />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
