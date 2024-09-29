@@ -1,18 +1,20 @@
-"use client"
+"use client";
 
-import { useForm } from "react-hook-form"
-import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Input } from "./ui/input"
-import { Button } from "./ui/button"
-import { Textarea } from "./ui/textarea"
-import { toast } from "sonner"
-import { newPost } from "../_actions/new-post"
+import { useForm } from "react-hook-form";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { Textarea } from "./ui/textarea";
+import { useRouter } from 'next/navigation';
+import { fetchClient } from "../_lib/fetchClient";
+import { toast } from "sonner";
+import { revalidatePath } from 'next/cache'
 
 const formSchema = z.object({
   title: z.string().min(5, {
-    message: "O titulo deve conter o mínimo de 5 caracteres.",
+    message: "O título deve conter o mínimo de 5 caracteres.",
   }),
   content: z.string().min(10, {
     message: "O conteúdo deve conter o mínimo de 10 caracteres.",
@@ -20,9 +22,10 @@ const formSchema = z.object({
   author: z.string().min(5, {
     message: "O autor deve conter o mínimo de 5 caracteres.",
   }),
-})
+});
 
 export const NewPostForm = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -30,16 +33,27 @@ export const NewPostForm = () => {
       content: "",
       author: "",
     },
-  })
+  });
 
-  async function onSubmit(post: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     try {
-      await newPost(post)
-      toast.success("Post criado com sucesso!")
-      form.reset()
+      const response = await fetchClient("http://localhost:3108/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      // Correção da verificação de status
+      if (response.status === 201) {
+        toast.success("Post criado com sucesso!");
+        router.push('/')
+        
+      }
     } catch (error) {
-      console.error(error)
-      toast.error("Erro ao criar post.")
+      console.error(error);
+      toast.error("Erro ao criar post.");
     }
   }
 
@@ -90,5 +104,5 @@ export const NewPostForm = () => {
         <Button type="submit">Submit</Button>
       </form>
     </Form>
-  )
-}
+  );
+};
