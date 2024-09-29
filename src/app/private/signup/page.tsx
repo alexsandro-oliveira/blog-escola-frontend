@@ -17,7 +17,7 @@ const SignUp = async () => {
   }
   return (
     <main className="flex min-h-screen items-center justify-center">
-      <Card className="mx-auto my-20 w-full max-w-md rounded-xl p-10 shadow-md">
+      <Card className="mx-auto my-20 w-[90%] max-w-md rounded-xl p-10 shadow-md">
         <CardHeader>
           <CardTitle className="text-center text-2xl">Cadastrar</CardTitle>
           <CardDescription className="text-center">
