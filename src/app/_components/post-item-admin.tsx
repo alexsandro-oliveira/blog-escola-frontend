@@ -5,11 +5,7 @@ import { format, formatDistance } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import { ButtonDelete } from "./ButtonDelete"
 
-interface PostAdminProps {
-  post: PostsAdmin.PostAdmin
-}
-
-const PostItemAdmin = async ({ post }: PostAdminProps) => {
+const PostItemAdmin = async ({ post }: { post: PostsAdmin.PostAdmin }) => {
   return (
     <Card className="min-w-[167px] rounded-2xl">
       <Link href={`/posts/${post._id}`}>
