@@ -17,7 +17,7 @@ const Home = async () => {
       <div className="p-5 lg:px-24">
         <SearchComponent />
         <div className="space-y-4 overflow-y-auto">
-          {posts.length > 0 &&
+          {posts && posts.length > 0 &&
             posts.map((post: Posts.Post) => (
               <PostItem key={post.id} post={post} />
             ))}
