@@ -6,4 +6,8 @@ declare namespace Posts {
     author: string
     createdAt: Date
   }
+
+  interface postId {
+    id: string
+  }
 }

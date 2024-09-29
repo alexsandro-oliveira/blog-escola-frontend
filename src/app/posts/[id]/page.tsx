@@ -3,13 +3,7 @@ import { Card, CardContent, CardFooter } from "@/app/_components/ui/card"
 import { format, formatDistance } from "date-fns"
 import { ptBR } from "date-fns/locale"
 
-interface PostPageProps {
-  params: {
-    id: string
-  }
-}
-
-const PostPage = async ({ params }: PostPageProps) => {
+const PostPage = async ({ params }: { params: Posts.postId }) => {
   let data: Response
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let post: any
