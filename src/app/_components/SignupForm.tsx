@@ -13,12 +13,12 @@ import {
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { fetchClient } from "../_lib/fetchClient"
 import { toast } from "sonner"
 import Link from "next/link"
+import { newTeacher } from "../_actions/create-teacher"
 
 const formSchema = z.object({
-  nome: z.string().min(1, {
+  name: z.string().min(1, {
     message: "O nome deve conter o mínimo de 1 caracteres.",
   }),
   email: z.string().email({
@@ -33,23 +33,16 @@ export default function SignupForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      nome: "",
+      name: "",
       email: "",
       password: "",
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(teacher: z.infer<typeof formSchema>) {
     try {
-      fetchClient("http://localhost:3108/teacher", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
+      await newTeacher(teacher)
       toast.success("Professor criado com sucesso!")
-      form
     } catch (error) {
       console.error(error)
       toast.error("Erro ao criar Professor.")
@@ -61,7 +54,7 @@ export default function SignupForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
-          name="nome"
+          name="name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Nome</FormLabel>
