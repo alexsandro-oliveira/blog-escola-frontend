@@ -79,7 +79,7 @@ export const NewPostForm = () => {
             <FormItem>
               <FormControl>
                 <Textarea
-                  className="h-[450px]"
+                  className="h-[250px]"
                   placeholder="Digite seu texto..."
                   {...field}
                 />

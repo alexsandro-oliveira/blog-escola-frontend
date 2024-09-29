@@ -7,7 +7,13 @@ declare namespace Posts {
     createdAt: Date
   }
 
-  interface postId {
+  export interface PostId {
     id: string
+  }
+
+  export interface Search {
+    searchParams: {
+      search?: string
+    }
   }
 }
