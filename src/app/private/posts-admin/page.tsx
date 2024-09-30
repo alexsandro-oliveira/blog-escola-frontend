@@ -15,7 +15,9 @@ const PostsAdmin = async () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let posts: any
   try {
-    const data = await fetchServer("http://localhost:3108/posts/admin")
+    const data = await fetchServer("http://localhost:3108/posts/admin", {
+      cache: "no-store",
+    })
     if (data.status !== 200) return { error: data.statusText }
     posts = await data.json()
   } catch (error) {
@@ -35,7 +37,8 @@ const PostsAdmin = async () => {
         </div>
 
         <div className="space-y-4 overflow-auto">
-          {posts && posts.length > 0 &&
+          {posts &&
+            posts.length > 0 &&
             posts.map((post: PostsAdmin.PostAdmin) => (
               <PostItemAdmin key={post._id} post={post} />
             ))}
