@@ -4,7 +4,11 @@ import { format, formatDistance } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import PostNotFound from "@/app/_components/post-not-found"
 
-const PostSearch = async ({ post }: { post: Posts.Post | PostsAdmin.PostAdmin }) => {
+const PostSearch = async ({
+  post,
+}: {
+  post: Posts.Post | PostsAdmin.PostAdmin
+}) => {
   return (
     <>
       {post ? (
@@ -12,21 +16,21 @@ const PostSearch = async ({ post }: { post: Posts.Post | PostsAdmin.PostAdmin })
           <Card className="mt-8 w-[80%] min-w-[167px] rounded-2xl">
             <CardContent>
               <div className="mt-8">
-                <p className="mb-8 text-2xl font-bold">{post.title}</p>
-                <p className="text-justify text-xl">{post.content}</p>
+                <p className="mb-8 text-xl font-bold">{post.title}</p>
+                <p className="text-justify">{post.content}</p>
               </div>
             </CardContent>
             <CardFooter className="mt-10 flex items-center justify-between">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center">
                 <Avatar>
                   <AvatarImage
                     src="https://github.com/shadcn.png"
                     alt="User avatar"
+                    className="h-8 w-8 rounded-full"
                   />
                 </Avatar>
                 <div>
-                  <p className="text-sm">Autor</p>
-                  <h1>{post.author}</h1>
+                  <h1 className="text-sm">{post.author}</h1>
                 </div>
               </div>
               <time

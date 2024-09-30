@@ -15,7 +15,7 @@ const Header = () => {
   const router = useRouter()
 
   return (
-    <Card>
+    <Card className="rounded-t-none">
       <CardContent className="flex flex-row items-center justify-between p-5 lg:px-8">
         <Button onClick={router.back} variant="outline" size="icon">
           <Undo2 size={18} />
