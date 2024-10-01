@@ -1,15 +1,22 @@
 "use client"
 
 import { useForm } from "react-hook-form"
-import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Input } from "./ui/input"
-import { Button } from "./ui/button"
-import { Textarea } from "./ui/textarea"
-import { useRouter } from "next/navigation"
-import { fetchClient } from "../_lib/fetchClient"
+
 import { toast } from "sonner"
+import { useRouter } from "next/navigation"
+import { fetchClient } from "@/app/_lib/fetchClient"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/app/_components/ui/form"
+import { Input } from "@/app/_components/ui/input"
+import { Textarea } from "@/app/_components/ui/textarea"
+import { Button } from "@/app/_components/ui/button"
 
 const formSchema = z.object({
   title: z.string().min(5, {
@@ -23,7 +30,7 @@ const formSchema = z.object({
   }),
 })
 
-export const NewPostForm = () => {
+const UpdatePostForm = () => {
   const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -103,3 +110,4 @@ export const NewPostForm = () => {
     </Form>
   )
 }
+export default UpdatePostForm

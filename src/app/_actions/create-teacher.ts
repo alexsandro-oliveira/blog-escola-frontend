@@ -4,13 +4,7 @@ import { revalidatePath } from "next/cache"
 import { fetchServer } from "../_lib/fetchServer"
 import { redirect } from "next/navigation"
 
-interface NewTeacherProps {
-  name: string
-  email: string
-  password: string
-}
-
-export const newTeacher = (teacher: NewTeacherProps) => {
+export const newTeacher = (teacher: Teacher.Teacher) => {
   fetchServer("http://localhost:3108/teachers", {
     method: "POST",
     headers: {

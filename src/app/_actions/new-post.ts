@@ -2,14 +2,9 @@
 
 import { revalidatePath } from "next/cache"
 import { fetchServer } from "../_lib/fetchServer"
+import { redirect } from "next/navigation"
 
-interface NewPostProps {
-  title: string
-  content: string
-  author: string
-}
-
-export const newPost = (post: NewPostProps) => {
+export const newPost = (post: PostsAdmin.PostContent) => {
   fetchServer("http://localhost:3108/posts", {
     method: "POST",
     headers: {
@@ -18,5 +13,6 @@ export const newPost = (post: NewPostProps) => {
     body: JSON.stringify(post),
   })
   revalidatePath("/")
-  revalidatePath("/posts/posts-admin")
+  revalidatePath("/private/posts-admin")
+  redirect("/private/posts-admin")
 }

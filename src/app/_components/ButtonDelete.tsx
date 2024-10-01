@@ -17,7 +17,11 @@ export const ButtonDelete = (id: PostsAdmin.PostPageProps) => {
   }
 
   return (
-    <Button className="w-fit" variant="destructive" onClick={handleDelete}>
+    <Button
+      className="w-fit gap-1 text-destructive"
+      variant="ghost"
+      onClick={handleDelete}
+    >
       <Trash2Icon size={18} />
       <p className="text-xs">Apagar</p>
     </Button>
