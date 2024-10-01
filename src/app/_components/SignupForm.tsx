@@ -104,7 +104,7 @@ export default function SignupForm() {
             <Link href="/">Voltar</Link>
           </Button>
           <Button className="w-full" type="submit">
-            Submit
+            Cadastrar
           </Button>
         </div>
       </form>

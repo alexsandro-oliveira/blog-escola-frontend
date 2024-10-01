@@ -40,11 +40,11 @@ const PostItemAdmin = async ({ post }: { post: PostsAdmin.PostAdmin }) => {
 
           <div className="mt-8">
             <p className="mb-4 font-bold">{post.title}</p>
-            <p className="line-clamp-2 truncate text-xs">{post.content}</p>
+            <p className="line-clamp-2 text-xs">{post.content}</p>
           </div>
         </CardContent>
       </Link>
-      <div className="flex justify-end">
+      <div className="flex justify-end m-3">
         <ButtonUpdate _id={post._id} />
         <ButtonDelete _id={post._id} />
       </div>
