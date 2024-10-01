@@ -7,9 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { Textarea } from "./ui/textarea"
-import { useRouter } from "next/navigation"
-import { fetchClient } from "../_lib/fetchClient"
 import { toast } from "sonner"
+import { newPost } from "../_actions/new-post"
 
 const formSchema = z.object({
   title: z.string().min(5, {
@@ -24,7 +23,6 @@ const formSchema = z.object({
 })
 
 export const NewPostForm = () => {
-  const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -36,18 +34,8 @@ export const NewPostForm = () => {
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     try {
-      const response = await fetchClient("http://localhost:3108/posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-
-      if (response.status === 201) {
-        toast.success("Post criado com sucesso!")
-        router.push("/private/posts-admin")
-      }
+      await newPost(data)
+      toast.success("Post criado com sucesso!")
     } catch (error) {
       console.error(error)
       toast.error("Erro ao criar post.")

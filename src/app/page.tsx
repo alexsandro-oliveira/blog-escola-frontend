@@ -6,7 +6,7 @@ const Home = async () => {
   let posts: Posts.Post[] = []
 
   try {
-    data = await fetch("http://localhost:3108/posts")
+    data = await fetch("http://localhost:3108/posts", { cache: "no-store" })
     posts = await data.json()
   } catch (error) {
     console.error("Error getting posts:", error)
@@ -17,7 +17,8 @@ const Home = async () => {
       <div className="p-5 lg:px-24">
         <SearchComponent />
         <div className="space-y-4 overflow-y-auto">
-          {posts && posts.length > 0 &&
+          {posts &&
+            posts.length > 0 &&
             posts.map((post: Posts.Post) => (
               <PostItem key={post.id} post={post} />
             ))}
