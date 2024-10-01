@@ -14,6 +14,7 @@ declare namespace Posts {
   export interface Search {
     searchParams: {
       search?: string
+      id?: string
     }
   }
 }

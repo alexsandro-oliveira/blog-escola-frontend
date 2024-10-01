@@ -39,7 +39,7 @@ const PostItem = async ({ post }: { post: Posts.Post }) => {
 
           <div className="mt-8">
             <p className="mb-4 font-bold">{post.title}</p>
-            <p className="line-clamp-2 truncate text-xs">{post.content}</p>
+            <p className="line-clamp-2 text-xs">{post.content}</p>
           </div>
         </CardContent>
       </Link>

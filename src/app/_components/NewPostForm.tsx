@@ -86,7 +86,7 @@ export const NewPostForm = () => {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Criar</Button>
       </form>
     </Form>
   )

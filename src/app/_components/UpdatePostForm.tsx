@@ -5,8 +5,6 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { toast } from "sonner"
-import { useRouter } from "next/navigation"
-import { fetchClient } from "@/app/_lib/fetchClient"
 import {
   Form,
   FormControl,
@@ -17,6 +15,7 @@ import {
 import { Input } from "@/app/_components/ui/input"
 import { Textarea } from "@/app/_components/ui/textarea"
 import { Button } from "@/app/_components/ui/button"
+import { updatePost } from "../_actions/update-post"
 
 const formSchema = z.object({
   title: z.string().min(5, {
@@ -30,34 +29,24 @@ const formSchema = z.object({
   }),
 })
 
-const UpdatePostForm = () => {
-  const router = useRouter()
+const UpdatePostForm = ({ post }: { post: PostsAdmin.PostAdmin }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      content: "",
-      author: "",
+      title: post.title,
+      content: post.content,
+      author: post.author,
     },
   })
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    try {
-      const response = await fetchClient("http://localhost:3108/posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
 
-      if (response.status === 201) {
-        toast.success("Post criado com sucesso!")
-        router.push("/private/posts-admin")
-      }
+    try {
+      await updatePost(post._id, data)
+      toast.success("Post editado com sucesso!")
     } catch (error) {
       console.error(error)
-      toast.error("Erro ao criar post.")
+      toast.error("Erro ao editar post.")
     }
   }
 
@@ -98,14 +87,14 @@ const UpdatePostForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Autor..." {...field} />
+                <Input placeholder="Autor..." {...field} disabled readOnly />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Editar</Button>
       </form>
     </Form>
   )
