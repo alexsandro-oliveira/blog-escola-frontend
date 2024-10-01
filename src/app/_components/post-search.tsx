@@ -42,7 +42,6 @@ const PostSearch = async ({
                 )}
                 dateTime={post.createdAt.toString()}
               >
-                Publicado há{" "}
                 {formatDistance(new Date(), new Date(post.createdAt), {
                   locale: ptBR,
                 })}{" "}

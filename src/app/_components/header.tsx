@@ -1,6 +1,6 @@
 "use client"
 
-import { MenuIcon, Undo2 } from "lucide-react"
+import { ChevronLeftIcon, MenuIcon } from "lucide-react"
 import { Button } from "./ui/button"
 import { Card, CardContent } from "./ui/card"
 import { Sheet, SheetTrigger } from "./ui/sheet"
@@ -18,7 +18,7 @@ const Header = () => {
     <Card className="rounded-t-none">
       <CardContent className="flex flex-row items-center justify-between p-5 lg:px-8">
         <Button onClick={router.back} variant="outline" size="icon">
-          <Undo2 size={18} />
+          <ChevronLeftIcon size={18} />
         </Button>
 
         <Link href="/">
