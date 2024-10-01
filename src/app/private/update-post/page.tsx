@@ -5,7 +5,6 @@ import { redirect } from "next/navigation"
 
 const UpdatePost = async ({ searchParams }: Posts.Search) => {
   const session = await getServerSession()
-  console.log("--->", searchParams.id)
 
   if (!session) {
     redirect("/")
@@ -15,11 +14,10 @@ const UpdatePost = async ({ searchParams }: Posts.Search) => {
   let post: PostsAdmin.PostAdmin | null = null
 
 try {
-  data = await fetch(`http://localhost:3108/posts/${searchParams.id}`);
-  post = await data.json();
-  console.log("---------------------------------> post", post);
+  data = await fetch(`http://localhost:3108/posts/${searchParams.id}`)
+  post = await data.json()
 } catch (error) {
-  console.error("Error getting post by id:", error);
+  console.error("Error getting post by id:", error)
 }
 
 return (
@@ -34,7 +32,7 @@ return (
       <PostNotFound />
     )}
   </>
-);
+)
 
 }
 
