@@ -6,6 +6,7 @@ import {
   HomeIcon,
   LogInIcon,
   LogOutIcon,
+  Sheet,
   UserPlusIcon,
 } from "lucide-react"
 import { Button } from "./ui/button"
@@ -57,24 +58,30 @@ const SidebarSheet = () => {
 
           {session?.user && (
             <>
-              <Button className="justify-start gap-2" variant="ghost" asChild>
-                <Link href="/private/posts-admin">
-                  <FolderDotIcon size={18} />
-                  Admin
-                </Link>
-              </Button>
-              <Button className="justify-start gap-2" variant="ghost" asChild>
-                <Link href="/private/new-post">
-                  <FilePlus2Icon size={18} />
-                  Novo Post
-                </Link>
-              </Button>
-              <Button className="justify-start gap-2" variant="ghost" asChild>
-                <Link href="/private/signup">
-                  <UserPlusIcon size={18} />
-                  Criar Professor
-                </Link>
-              </Button>
+              <SheetClose asChild>
+                <Button className="justify-start gap-2" variant="ghost" asChild>
+                  <Link href="/private/posts-admin">
+                    <FolderDotIcon size={18} />
+                    Admin
+                  </Link>
+                </Button>
+              </SheetClose>
+              <SheetClose asChild>
+                <Button className="justify-start gap-2" variant="ghost" asChild>
+                  <Link href="/private/new-post">
+                    <FilePlus2Icon size={18} />
+                    Novo Post
+                  </Link>
+                </Button>
+              </SheetClose>
+              <SheetClose asChild>
+                <Button className="justify-start gap-2" variant="ghost" asChild>
+                  <Link href="/private/signup">
+                    <UserPlusIcon size={18} />
+                    Criar Professor
+                  </Link>
+                </Button>
+              </SheetClose>
 
               <Button
                 className="w-fit justify-start gap-2 text-destructive"
