@@ -16,7 +16,7 @@ export const fetchClient = async (
       ...(jwt && { Authorization: `Bearer ${jwt}` }),
     },
   })
-  console.log(response)
+
   if (response.status === 401) {
     await signOut()
   }

@@ -4,6 +4,7 @@ import { Card, CardContent } from "./ui/card"
 import { format, formatDistance } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import { ButtonDelete } from "./ButtonDelete"
+import { ButtonUpdate } from "./ButtonUpdate"
 
 const PostItemAdmin = async ({ post }: { post: PostsAdmin.PostAdmin }) => {
   return (
@@ -11,14 +12,15 @@ const PostItemAdmin = async ({ post }: { post: PostsAdmin.PostAdmin }) => {
       <Link href={`/posts/${post._id}`}>
         <CardContent>
           <header className="mt-3 flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center">
               <Avatar>
                 <AvatarImage
                   src="https://github.com/shadcn.png"
                   alt="User avatar"
+                  className="h-8 w-8 rounded-full"
                 />
               </Avatar>
-              <h1>{post.author}</h1>
+              <h1 className="text-xs">{post.author}</h1>
             </div>
             <time
               className="text-xs"
@@ -29,7 +31,6 @@ const PostItemAdmin = async ({ post }: { post: PostsAdmin.PostAdmin }) => {
               )}
               dateTime={post.createdAt.toString()}
             >
-              Publicado há{" "}
               {formatDistance(new Date(), new Date(post.createdAt), {
                 locale: ptBR,
               })}{" "}
@@ -38,13 +39,15 @@ const PostItemAdmin = async ({ post }: { post: PostsAdmin.PostAdmin }) => {
           </header>
 
           <div className="mt-8">
-            <p className="mb-4">{post.title}</p>
+            <p className="mb-4 font-bold">{post.title}</p>
             <p className="line-clamp-2 text-xs">{post.content}</p>
           </div>
         </CardContent>
       </Link>
-
-      <ButtonDelete _id={post._id} />
+      <div className="flex justify-end m-3">
+        <ButtonUpdate _id={post._id} />
+        <ButtonDelete _id={post._id} />
+      </div>
     </Card>
   )
 }

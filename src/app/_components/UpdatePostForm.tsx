@@ -1,14 +1,21 @@
 "use client"
 
 import { useForm } from "react-hook-form"
-import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Input } from "./ui/input"
-import { Button } from "./ui/button"
-import { Textarea } from "./ui/textarea"
+
 import { toast } from "sonner"
-import { newPost } from "../_actions/new-post"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/app/_components/ui/form"
+import { Input } from "@/app/_components/ui/input"
+import { Textarea } from "@/app/_components/ui/textarea"
+import { Button } from "@/app/_components/ui/button"
+import { updatePost } from "../_actions/update-post"
 
 const formSchema = z.object({
   title: z.string().min(5, {
@@ -22,23 +29,24 @@ const formSchema = z.object({
   }),
 })
 
-export const NewPostForm = () => {
+const UpdatePostForm = ({ post }: { post: PostsAdmin.PostAdmin }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      content: "",
-      author: "",
+      title: post.title,
+      content: post.content,
+      author: post.author,
     },
   })
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
+
     try {
-      await newPost(data)
-      toast.success("Post criado com sucesso!")
+      await updatePost(post._id, data)
+      toast.success("Post editado com sucesso!")
     } catch (error) {
       console.error(error)
-      toast.error("Erro ao criar post.")
+      toast.error("Erro ao editar post.")
     }
   }
 
@@ -79,15 +87,16 @@ export const NewPostForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Autor..." {...field} />
+                <Input placeholder="Autor..." {...field} disabled readOnly />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type="submit">Criar</Button>
+        <Button type="submit">Editar</Button>
       </form>
     </Form>
   )
 }
+export default UpdatePostForm

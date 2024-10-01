@@ -10,4 +10,10 @@ declare namespace PostsAdmin {
   export interface PostPageProps {
     _id: string
   }
+
+  export interface PostContent {
+    title: string
+    content: string
+    author: string
+  }
 }

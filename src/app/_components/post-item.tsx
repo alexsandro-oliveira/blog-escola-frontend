@@ -11,14 +11,15 @@ const PostItem = async ({ post }: { post: Posts.Post }) => {
       <Link href={`/posts/${post.id}`}>
         <CardContent>
           <header className="mt-3 flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center">
               <Avatar>
                 <AvatarImage
                   src="https://github.com/shadcn.png"
                   alt="User avatar"
+                  className="h-8 w-8 rounded-full"
                 />
               </Avatar>
-              <h1>{post.author}</h1>
+              <h1 className="text-xs">{post.author}</h1>
             </div>
             <time
               className="text-xs"
@@ -29,7 +30,6 @@ const PostItem = async ({ post }: { post: Posts.Post }) => {
               )}
               dateTime={post.createdAt.toString()}
             >
-              Publicado há{" "}
               {formatDistance(new Date(), new Date(post.createdAt), {
                 locale: ptBR,
               })}{" "}
@@ -38,7 +38,7 @@ const PostItem = async ({ post }: { post: Posts.Post }) => {
           </header>
 
           <div className="mt-8">
-            <p className="mb-4">{post.title}</p>
+            <p className="mb-4 font-bold">{post.title}</p>
             <p className="line-clamp-2 text-xs">{post.content}</p>
           </div>
         </CardContent>

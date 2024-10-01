@@ -1,4 +1,4 @@
-export const getPostsById = async (id: Posts.postId) => {
+export const getPostsById = async (id: Posts.PostId) => {
   let data: Response
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let post: any
