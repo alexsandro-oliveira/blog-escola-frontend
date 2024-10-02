@@ -1,4 +1,4 @@
-import { SearchComponent } from "../app/posts/search/SearchComponent"
+import { SearchComponent } from "./_components/SearchComponent"
 import PostItem from "./_components/post-item"
 
 const Home = async () => {
