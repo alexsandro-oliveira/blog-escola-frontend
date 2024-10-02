@@ -6,7 +6,6 @@ import {
   HomeIcon,
   LogInIcon,
   LogOutIcon,
-  Sheet,
   UserPlusIcon,
 } from "lucide-react"
 import { Button } from "./ui/button"
@@ -18,7 +17,6 @@ import {
   SheetTitle,
 } from "./ui/sheet"
 import Link from "next/link"
-
 import { signOut, useSession } from "next-auth/react"
 
 const SidebarSheet = () => {
@@ -27,7 +25,7 @@ const SidebarSheet = () => {
   const handleLogoutClick = () => signOut()
 
   return (
-    <SheetContent>
+    <SheetContent className="w-[300px]">
       <SheetHeader>
         <SheetTitle className="text-left">Menu</SheetTitle>
       </SheetHeader>
@@ -35,22 +33,29 @@ const SidebarSheet = () => {
 
       <div>
         <div className="flex items-center justify-between gap-3 border-b border-solid py-5">
-          <h2 className="p-5 text-lg font-bold">
-            Olá {session?.user?.name}, faça seu login!
-          </h2>
-
-          <Button size="icon">
-            <Link href="/api/auth/signin">
-              <LogInIcon />
-            </Link>
-          </Button>
+          {session?.user ? (
+            <h2 className="p-5 text-lg font-bold">
+              Olá {session?.user?.name}!
+            </h2>
+          ) : (
+            <>
+              <h2 className="p-5 text-base font-bold">Olá. Faça seu Login!</h2>
+              <SheetClose asChild>
+                <Button size="icon">
+                  <Link href="/api/auth/signin">
+                    <LogInIcon />
+                  </Link>
+                </Button>
+              </SheetClose>
+            </>
+          )}
         </div>
 
         <div className="flex flex-col gap-4 p-5">
           <SheetClose asChild>
             <Button className="justify-start gap-2" variant="ghost" asChild>
               <Link href="/">
-                <HomeIcon size={18} />
+                <HomeIcon size={18} className="text-primary" />
                 Inicio
               </Link>
             </Button>
@@ -61,7 +66,7 @@ const SidebarSheet = () => {
               <SheetClose asChild>
                 <Button className="justify-start gap-2" variant="ghost" asChild>
                   <Link href="/private/posts-admin">
-                    <FolderDotIcon size={18} />
+                    <FolderDotIcon size={18} className="text-primary" />
                     Admin
                   </Link>
                 </Button>
@@ -69,7 +74,7 @@ const SidebarSheet = () => {
               <SheetClose asChild>
                 <Button className="justify-start gap-2" variant="ghost" asChild>
                   <Link href="/private/new-post">
-                    <FilePlus2Icon size={18} />
+                    <FilePlus2Icon size={18} className="text-primary" />
                     Novo Post
                   </Link>
                 </Button>
@@ -77,7 +82,7 @@ const SidebarSheet = () => {
               <SheetClose asChild>
                 <Button className="justify-start gap-2" variant="ghost" asChild>
                   <Link href="/private/signup">
-                    <UserPlusIcon size={18} />
+                    <UserPlusIcon size={18} className="text-primary" />
                     Criar Professor
                   </Link>
                 </Button>
