@@ -2,15 +2,8 @@ import { SearchComponent } from "./_components/SearchComponent"
 import PostItem from "./_components/post-item"
 
 const Home = async () => {
-  let data: Response
-  let posts: Posts.Post[] = []
-
-  try {
-    data = await fetch("http://localhost:3108/posts", { cache: "no-store" })
-    posts = await data.json()
-  } catch (error) {
-    console.error("Error getting posts:", error)
-  }
+  const data = await fetch("http://localhost:3108/posts", { cache: "no-store" })
+  const posts = await data.json()
 
   return (
     <div className="w-full">
