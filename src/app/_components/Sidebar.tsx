@@ -6,7 +6,6 @@ import {
   HomeIcon,
   LogInIcon,
   LogOutIcon,
-  Sheet,
   UserPlusIcon,
 } from "lucide-react"
 import { Button } from "./ui/button"
